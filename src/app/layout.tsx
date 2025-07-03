@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   description: "A simple app for The Financialist assignment",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
   return (
     <html lang="en">
