@@ -12,14 +12,10 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth`,
-        {
-          username,
-          password,
-        }
-      );
-      console.log("response", response, response.data);
+      const response = await axios.post("http://localhost:3001/auth", {
+        username,
+        password,
+      });
 
       Cookies.set("token", response.data.token, { sameSite: "strict" });
 
@@ -35,31 +31,29 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          Login
-        </h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-black mb-2" htmlFor="username">
+            <label className="block text-gray-700 mb-2" htmlFor="username">
               Username
             </label>
             <input
               type="text"
               id="username"
-              className="w-full p-2 border rounded text-black"
+              className="w-full p-2 border rounded"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-900 mb-2" htmlFor="password">
+            <label className="block text-gray-700 mb-2" htmlFor="password">
               Password
             </label>
             <input
               type="password"
               id="password"
-              className="w-full p-2 border rounded text-black"
+              className="w-full p-2 border rounded"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
